@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <title>SITHUWA • TikTok Downloader</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#05070c;
+      color:#fff;
+      min-height:100vh;
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+      radial-gradient(circle at 50% 0,#15283b 0,transparent 42%),
+      linear-gradient(135deg,#05070c,#08101a 55%,#07030d);
+      z-index:-2;
+    }
+
+    .wrap{
+      max-width:900px;
+      margin:auto;
+      padding:22px 16px 50px;
+    }
+
+    .top{
+      text-align:center;
+      padding:18px 0 12px;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:10px 18px;
+      border:1px solid #00ffff;
+      border-radius:30px;
+      color:#32eaff;
+      background:#07141d;
+      box-shadow:0 0 18px #00d9ff33;
+      font-size:13px;
+      letter-spacing:1px;
+    }
+
+    h1{
+      font-size:42px;
+      margin:22px 0 8px;
+      font-weight:900;
+    }
+
+    h1 span{
+      color:#08d9ff;
+      text-shadow:0 0 18px #08d9ff66;
+    }
+
+    .sub{
+      color:#91a5b9;
+      line-height:1.6;
+    }
+
+    .card{
+      margin-top:24px;
+      padding:22px;
+      border:1px solid #12364a;
+      border-radius:22px;
+      background:rgba(5,12,20,.84);
+      box-shadow:0 0 35px #00bfff10;
+    }
+
+    label{
+      display:block;
+      color:#9eb5c7;
+      font-size:13px;
+      margin-bottom:8px;
+    }
+
+    input{
+      width:100%;
+      padding:16px;
+      border-radius:13px;
+      border:1px solid #17465d;
+      background:#02060b;
+      color:#fff;
+      outline:none;
+      font-size:15px;
+    }
+
+    input:focus{
+      border-color:#09d9ff;
+      box-shadow:0 0 0 3px #00d9ff12;
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    button{
+      border:0;
+      border-radius:13px;
+      padding:15px;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(90deg,#008fba,#3954ff);
+    }
+
+    button.news{
+      background:linear-gradient(90deg,#8b2cff,#e40075);
+    }
+
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .status{
+      min-height:22px;
+      text-align:center;
+      color:#7fdfff;
+      margin-top:14px;
+      font-size:13px;
+    }
+
+    .result{
+      display:none;
+      margin-top:20px;
+    }
+
+    .preview{
+      width:100%;
+      max-height:430px;
+      object-fit:cover;
+      border-radius:18px;
+      background:#000;
+      border:1px solid #183a4d;
+    }
+
+    .title{
+      font-size:18px;
+      font-weight:800;
+      margin:14px 0 5px;
+    }
+
+    .author{
+      color:#7e9bad;
+      font-size:13px;
+    }
+
+    .download-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .download-grid button{
+      font-size:13px;
+      padding:13px;
+    }
+
+    .newsbox{
+      display:none;
+      margin-top:20px;
+    }
+
+    .newsitem{
+      padding:14px 0;
+      border-bottom:1px solid #163040;
+    }
+
+    .newsitem a{
+      color:#dff8ff;
+      text-decoration:none;
+      font-weight:700;
+      line-height:1.45;
+    }
+
+    .source{
+      display:block;
+      color:#688698;
+      font-size:11px;
+      margin-top:5px;
+    }
+
+    .foot{
+      text-align:center;
+      color:#536c7b;
+      font-size:12px;
+      margin-top:35px;
+    }
+
+    @media(max-width:650px){
+      h1{
+        font-size:31px;
+      }
+
+      .actions{
+        grid-template-columns:1fr;
+      }
+
+      .download-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .card{
+        padding:17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <header class="top">
+
+    <div class="badge">
+      ● LIVE • FREE • NO ACCOUNT NEEDED
+    </div>
+
+    <h1>
+      SITHUWA <span>TIKTOK DL</span>
+    </h1>
+
+    <div class="sub">
+      TikTok video & audio downloader • No watermark options • Today's news
+    </div>
+
+  </header>
+
+
+  <section class="card">
+
+    <label for="url">
+      TIKTOK VIDEO LINK
+    </label>
+
+    <input
+      id="url"
+      type="url"
+      placeholder="https://www.tiktok.com/@user/video/..."
+    >
+
+    <div class="actions">
+
+      <button id="downloadBtn">
+        ⬇ DOWNLOAD TIKTOK
+      </button>
+
+      <button id="newsBtn" class="news">
+        📰 TODAY'S NEWS
+      </button>
+
+    </div>
+
+    <div id="status" class="status"></div>
+
+
+    <div id="result" class="result">
+
+      <img
+        id="cover"
+        class="preview"
+        alt="TikTok preview"
+      >
+
+      <div id="title" class="title"></div>
+
+      <div id="author" class="author"></div>
+
+
+      <div class="download-grid">
+
+        <button id="wm">
+          🎟️ Watermark
+        </button>
+
+        <button id="sd">
+          📼 No-WM SD
+        </button>
+
+        <button id="hd">
+          🎬 HD No-WM
+        </button>
+
+        <button id="audio">
+          🎶 Audio
+        </button>
+
+        <button id="document">
+          📁 Audio File
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div id="newsbox" class="newsbox">
+
+      <h2>
+        📰 අද දවසේ ප්‍රවෘත්ති
+      </h2>
+
+      <div id="newslist"></div>
+
+    </div>
+
+  </section>
+
+
+  <div class="foot">
+    © POWERD BY SITHUWA • 2026
+  </div>
+
+</div>
+
+
+<script>
+
+const $ = id => document.getElementById(id);
+
+let current = null;
+
+
+function setStatus(text){
+  $("status").textContent = text;
+}
+
+
+$("downloadBtn").onclick = async () => {
+
+  const url = $("url").value.trim();
+
+  if(!url || !url.includes("tiktok.com")){
+
+    setStatus(
+      "⚠️ කරුණාකර නිවැරදි TikTok link එකක් දාන්න."
+    );
+
+    return;
+  }
+
+
+  $("downloadBtn").disabled = true;
+
+  $("result").style.display = "none";
+
+  setStatus(
+    "⏳ TikTok video එක සොයමින්..."
+  );
+
+
+  try{
+
+    const response = await fetch(
+      "/api/tiktok?url=" +
+      encodeURIComponent(url)
+    );
+
+    const data = await response.json();
+
+
+    if(!response.ok || !data.ok){
+
+      throw new Error(
+        data.error || "Download failed"
+      );
+
+    }
+
+
+    current = data.result;
+
+
+    $("cover").src =
+      current.cover ||
+      current.author?.avatar ||
+      "";
+
+
+    $("title").textContent =
+      current.title ||
+      "TikTok Video";
+
+
+    $("author").textContent =
+      "👤 " +
+      (
+        current.author?.username ||
+        "TikTok User"
+      );
+
+
+    $("result").style.display = "block";
+
+
+    setStatus(
+      "✅ Video found. Download option එකක් තෝරන්න."
+    );
+
+
+  }catch(error){
+
+    setStatus(
+      "❌ " + error.message
+    );
+
+  }finally{
+
+    $("downloadBtn").disabled = false;
+
+  }
+
+};
+
+
+function openDownload(url,name){
+
+  if(!url){
+
+    setStatus(
+      "❌ මේ format එක ලබාගත නොහැක."
+    );
+
+    return;
+  }
+
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.target = "_blank";
+
+  a.rel = "noopener";
+
+  a.download =
+    name || "tiktok";
+
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+}
+
+
+$("wm").onclick = () => {
+
+  openDownload(
+    current?.downloads?.find(
+      x => x.type === "watermark"
+    )?.url,
+    "tiktok-watermark"
+  );
+
+};
+
+
+$("sd").onclick = () => {
+
+  openDownload(
+    current?.downloads?.find(
+      x => x.type === "mp4"
+    )?.url,
+    "tiktok-no-watermark"
+  );
+
+};
+
+
+$("hd").onclick = () => {
+
+  openDownload(
+    current?.downloads?.find(
+      x => x.type === "hd"
+    )?.url,
+    "tiktok-hd"
+  );
+
+};
+
+
+$("audio").onclick = () => {
+
+  openDownload(
+    current?.downloads?.find(
+      x => x.type === "mp3"
+    )?.url,
+    "tiktok-audio.mp3"
+  );
+
+};
+
+
+$("document").onclick = () => {
+
+  openDownload(
+    current?.downloads?.find(
+      x => x.type === "mp3"
+    )?.url,
+    "tiktok-audio.mp3"
+  );
+
+};
+
+
+$("newsBtn").onclick = async () => {
+
+  $("newsbox").style.display = "block";
+
+  $("newslist").innerHTML =
+    "<p>⏳ අද දවසේ ප්‍රවෘත්ති ගනිමින්...</p>";
+
+
+  try{
+
+    const response =
+      await fetch("/api/news");
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok || !data.ok){
+
+      throw new Error(
+        data.error ||
+        "News unavailable"
+      );
+
+    }
+
+
+    $("newslist").innerHTML =
+      data.items.map((news,index) =>
+
+        `<div class="newsitem">
+
+          <a
+            href="${news.link}"
+            target="_blank"
+            rel="noopener"
+          >
+            ${index + 1}. ${escapeHtml(news.title)}
+          </a>
+
+          <span class="source">
+            ${escapeHtml(news.source || "News")}
+          </span>
+
+        </div>`
+
+      ).join("");
+
+
+  }catch(error){
+
+    $("newslist").innerHTML =
+      "<p>❌ ප්‍රවෘත්ති ලබාගත නොහැක.</p>";
+
+  }
+
+};
+
+
+function escapeHtml(text){
+
+  return String(text).replace(
+    /[&<>"']/g,
+
+    character => ({
+
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+
+    }[character])
+
+  );
+
+}
+
+</script>
+
+</body>
+  </html>
